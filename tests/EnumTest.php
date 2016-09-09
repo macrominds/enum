@@ -25,34 +25,38 @@
  */
 
 namespace macrominds\tests;
+
 use macrominds\enums\Salutation;
 
 class EnumTest extends \PHPUnit_Framework_TestCase
 {
-	 /** @test */
-	 public function it_should_provide_instances_of_the_enum(){
-	 	$this->assertNotNull(Salutation::MR());
-	 	$this->assertInstanceOf(Salutation::class, Salutation::MR());
+    /** @test */
+     public function it_should_provide_instances_of_the_enum()
+     {
+         $this->assertNotNull(Salutation::MR());
+         $this->assertInstanceOf(Salutation::class, Salutation::MR());
 
-	 	// same instance
-	 	$this->assertEquals(Salutation::MR(),Salutation::MR());
-	 	// just to be sure:
-	 	$this->assertTrue(Salutation::MR()===Salutation::MR());
-	 	// not same instance
-	 	$this->assertNotEquals(Salutation::MR(), Salutation::MRS());
-	 	// just to be sure:
-	 	$this->assertFalse(Salutation::MR()===Salutation::MRS());
-	 }
+        // same instance
+        $this->assertEquals(Salutation::MR(), Salutation::MR());
+        // just to be sure:
+        $this->assertTrue(Salutation::MR()===Salutation::MR());
+        // not same instance
+        $this->assertNotEquals(Salutation::MR(), Salutation::MRS());
+        // just to be sure:
+        $this->assertFalse(Salutation::MR()===Salutation::MRS());
+     }
 
-	 /** @test */
-	 public function it_should_provide_a_value(){
-	 	$this->assertEquals(2, Salutation::MR()->value());
-	 	$this->assertEquals(2, ''.Salutation::MR());
-	 }
+     /** @test */
+     public function it_should_provide_a_value()
+     {
+         $this->assertEquals(2, Salutation::MR()->value());
+         $this->assertEquals(2, ''.Salutation::MR());
+     }
 
-	 /** @test */
-	 public function it_cannot_be_instanciated_directly(){
-	 	$this->expectException(\Error::class);
-	 	new Salutation(4);
-	 }
+     /** @test */
+     public function it_cannot_be_instanciated_directly()
+     {
+         $this->expectException(\Error::class);
+         new Salutation(4);
+     }
 }

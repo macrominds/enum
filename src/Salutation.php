@@ -32,21 +32,24 @@ class Salutation
 
     public static $map;
 
-    protected function __construct($value) {
+    protected function __construct($value)
+    {
         $this->value = $value;
     }
 
-    public static function init () {
+    public static function init()
+    {
         self::$map = [
-			'MRS' => new static(1),
-		    'MR' => new static(2),
-		    'MS' => new static(3)
-    	];
+            'MRS' => new static(1),
+            'MR' => new static(2),
+            'MS' => new static(3)
+        ];
     }
 
-    public static function __callStatic($element, $arguments) {
-        if(isset(self::$map[$element])){
-        	return self::$map[$element];
+    public static function __callStatic($element, $arguments)
+    {
+        if (isset(self::$map[$element])) {
+            return self::$map[$element];
         }
         $trace = debug_backtrace();
         trigger_error(
@@ -57,11 +60,13 @@ class Salutation
         return null;
     }
 
-    public function value() {
+    public function value()
+    {
         return $this->value;
     }
 
-    public function __toString () {
+    public function __toString()
+    {
         return ''.$this->value;
     }
 }
