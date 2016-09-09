@@ -26,13 +26,7 @@
 
 namespace macrominds\enum;
 
-class Salutation extends Enum
+trait Enumerations
 {
-    use Enumerations;
-
-    protected static $enums = [
-            'MRS' => 1,
-            'MR' => 2,
-            'MS' => 3
-        ];
+    protected static $map = null;
 }

@@ -26,7 +26,8 @@
 
 namespace macrominds\tests;
 
-use macrominds\enums\Salutation;
+use macrominds\enum\Salutation;
+use macrominds\enum\AnyValueEnum;
 
 class EnumTest extends \PHPUnit_Framework_TestCase
 {
@@ -58,5 +59,35 @@ class EnumTest extends \PHPUnit_Framework_TestCase
      {
          $this->expectException(\Error::class);
          new Salutation(4);
+     }
+
+     /** @test */
+     public function it_can_be_used_for_typehinting()
+     {
+         $this->typeHintedFunction(Salutation::MR());
+         $this->expectException(\TypeError::class);
+         $this->typeHintedFunction('Mr');
+     }
+
+    public function typeHintedFunction(Salutation $salutation)
+    {
+        return $salutation;
+    }
+     /** @test */
+     public function it_can_use_any_value_type()
+     {
+         $this->assertEquals(AnyValueEnum::String(), AnyValueEnum::String());
+         $this->assertEquals(AnyValueEnum::Integer(), AnyValueEnum::Integer());
+         $this->assertEquals(AnyValueEnum::Object(), AnyValueEnum::Object());
+
+         $this->assertNotEquals(AnyValueEnum::String(), AnyValueEnum::Integer());
+         $this->assertNotEquals(AnyValueEnum::Integer(), AnyValueEnum::Object());
+         $this->assertNotEquals(AnyValueEnum::Object(), AnyValueEnum::String());
+     }
+
+     /** @test */
+     public function it_checks_that_the_configured_names_and_values_are_unique()
+     {
+         $this->markTestSkipped('It currently doesn\'t check for unique names or values. At the moment, this is the responsibility of the developer of the custom enum.');
      }
 }

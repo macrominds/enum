@@ -26,13 +26,16 @@
 
 namespace macrominds\enum;
 
-class Salutation extends Enum
+class AnyValueEnum extends Enum
 {
     use Enumerations;
 
-    protected static $enums = [
-            'MRS' => 1,
-            'MR' => 2,
-            'MS' => 3
+    protected static function enums()
+    {
+        return [
+            'String' => 'string',
+            'Integer' => 2,
+            'Object' => Salutation::MR()
         ];
+    }
 }
