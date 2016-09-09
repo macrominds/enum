@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - abstract class Enum with unit tests
+- trait Enumerations
 - usage guide
 
 ### Changed
