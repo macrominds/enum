@@ -38,6 +38,9 @@ abstract class Enum
 
     private static function init()
     {
+        if (!isset(static::$enums)&&!method_exists(static::class, 'enums')) {
+            throw new \Exception('You must either implement static field or static method "enums".');
+        }
         $enums = isset(static::$enums)?static::$enums:static::enums();
         // TODO implement check for unique names and values
         foreach ($enums as $name=>$value) {
