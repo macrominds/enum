@@ -1,0 +1,27 @@
+{
+    "name": "macrominds/enum",
+    "description": "A simple enum implementation for php that allows for typehinting.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Praxl",
+            "email": "thomas@macrominds.de"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.3"
+    },
+    "autoload": {
+        "psr-4": { "macrominds\\enum\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "macrominds\\enum\\": "tests/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
