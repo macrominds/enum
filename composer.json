@@ -20,5 +20,8 @@
     },
     "autoload-dev": {
         "psr-4": { "macrominds\\enum\\": "tests/" }
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }
