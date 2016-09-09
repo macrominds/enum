@@ -54,6 +54,8 @@ class EnumTest extends \PHPUnit_Framework_TestCase
          $this->assertEquals(2, ''.Salutation::MR());
      }
 
+     // TODO: not working in php5.6
+     // see http://php.net/manual/de/language.exceptions.php#Hcom118280
      /** @test */
      public function it_cannot_be_instanciated_directly()
      {

@@ -60,3 +60,4 @@ public function (Salutation $salutation)  {
 ## TODO
 - More source documentation.
 - Make sure that configured names and values are unique: This is currently the developer's responsibility when creating a custom Enum.
+- Make php5.6 compatible
