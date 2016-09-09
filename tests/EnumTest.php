@@ -28,6 +28,9 @@ namespace macrominds\tests;
 
 use macrominds\enum\Salutation;
 use macrominds\enum\AnyValueEnum;
+use macrominds\enum\invalid\InvalidInstanceField;
+use macrominds\enum\invalid\InvalidInstanceMethod;
+use macrominds\enum\invalid\InvalidMissingFieldAndMethod;
 
 class EnumTest extends \PHPUnit_Framework_TestCase
 {
@@ -85,6 +88,31 @@ class EnumTest extends \PHPUnit_Framework_TestCase
          $this->assertNotEquals(AnyValueEnum::String(), AnyValueEnum::Integer());
          $this->assertNotEquals(AnyValueEnum::Integer(), AnyValueEnum::Object());
          $this->assertNotEquals(AnyValueEnum::Object(), AnyValueEnum::String());
+     }
+
+     /** @test */
+     public function it_reports_errors_when_the_custom_enum_is_not_setup_correctly()
+     {
+         try {
+             InvalidInstanceField::ONE();
+             $this->fail('A custom Enum with an instance field "enums" instead of a static field "enums" should throw a meaningful Exception');
+         } catch (\Exception $e) {
+             // success
+         }
+
+         try {
+             InvalidInstanceMethod::ONE();
+             $this->fail('A custom Enum with an instance method "enums" instead of a static method "enums" should throw a meaningful Exception');
+         } catch (\Exception $e) {
+             // success
+         }
+
+         try {
+             InvalidMissingFieldAndMethod::ONE();
+             $this->fail('A custom Enum without a static field or a static method "enums" should throw a meaningful Exception');
+         } catch (\Exception $e) {
+             // success
+         }
      }
 
      /** @test */
