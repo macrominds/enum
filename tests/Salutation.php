@@ -26,48 +26,11 @@
 
 namespace macrominds\enums;
 
-class Salutation
+class Salutation extends Enum
 {
-    private $value = null;
-
-    public static $map;
-
-    protected function __construct($value)
-    {
-        $this->value = $value;
-    }
-
-    public static function init()
-    {
-        self::$map = [
-            'MRS' => new static(1),
-            'MR' => new static(2),
-            'MS' => new static(3)
+    protected static $enums = [
+            'MRS' => 1,
+            'MR' => 2,
+            'MS' => 3
         ];
-    }
-
-    public static function __callStatic($element, $arguments)
-    {
-        if (isset(self::$map[$element])) {
-            return self::$map[$element];
-        }
-        $trace = debug_backtrace();
-        trigger_error(
-            'Undefined Enum value '.$element.' for ' . static::class .
-            ' in ' . $trace[0]['file'] .
-            ' line ' . $trace[0]['line'],
-            E_USER_NOTICE);
-        return null;
-    }
-
-    public function value()
-    {
-        return $this->value;
-    }
-
-    public function __toString()
-    {
-        return ''.$this->value;
-    }
 }
-Salutation::init();
