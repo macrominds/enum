@@ -30,6 +30,7 @@ namespace macrominds\enum;
 abstract class Enum
 {
     private $value = null;
+    private static $original_enums = null;
 
     protected function __construct($value)
     {
@@ -41,22 +42,16 @@ abstract class Enum
         if (!isset(static::$enums)&&!method_exists(static::class, 'enums')) {
             throw new \Exception('You must either implement static field or static method "enums".');
         }
-        $enums = isset(static::$enums)?static::$enums:static::enums();
+        self::$original_enums = isset(static::$enums)?static::$enums:static::enums();
         // TODO implement check for unique names and values
-        foreach ($enums as $name=>$value) {
+        foreach (self::$original_enums as $name=>$value) {
             static::$map[''.$name] = new static($value);
         }
     }
 
     public static function __callStatic($element, $arguments)
     {
-        if (!in_array(Enumerations::class, class_uses(static::class), true)) {
-            throw new \Exception(sprintf("You must add the trait \"macrominds\\enum\\Enumerations\" to your custom Enum.\n".
-                "Example:\n\nclass %s\n{\n\tuse macrominds\\enum\\Enumerations;\n//[...]\n}", self::stripNS(static::class)));
-        }
-        if (static::$map===null) {
-            static::init();
-        }
+        self::initIfNecessary();
         if (isset(static::$map[$element])) {
             return static::$map[$element];
         }
@@ -67,6 +62,16 @@ abstract class Enum
         return null;
     }
 
+    private static function initIfNecessary()
+    {
+        if (!in_array(Enumerations::class, class_uses(static::class), true)) {
+            throw new \Exception(sprintf("You must add the trait \"macrominds\\enum\\Enumerations\" to your custom Enum.\n".
+                "Example:\n\nclass %s\n{\n\tuse macrominds\\enum\\Enumerations;\n//[...]\n}", self::stripNS(static::class)));
+        }
+        if (static::$map===null) {
+            static::init();
+        }
+    }
     private static function stripNS($className)
     {
         return substr($className, strrpos($className, '\\') + 1);
@@ -84,6 +89,20 @@ abstract class Enum
     public function value()
     {
         return $this->value;
+    }
+    /**
+    * @param mixed $value
+    * @return mixed instance of concrete Enum class.
+    */
+    public static function fromValue($value)
+    {
+        self::initIfNecessary();
+        // don't use array_flip here, because the values may be of a type that is not allowed to be a key.
+        $key = array_search($value, self::$original_enums, true);
+        if ($key===false) {
+            throw new \Exception(sprintf("Value %s doesn't represent any of the values of %s.", $value, static::class));
+        }
+        return static::$map[''.$key];
     }
 
     public function __toString()
