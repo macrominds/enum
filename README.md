@@ -48,8 +48,14 @@ That's it. You are now able to typehint your functions and you're sure that you 
 
 ```
 // example for type hinted function
-public function (Salutation $salutation)  {
+public function save(Salutation $salutation) {
 	saveToDB($salutation->value());
+}
+
+// example for fetching the enum from value
+public function load($value) {
+    // throws \Exception if $value is invalid
+    return Salutation::fromValue($value);
 }
 ```
 

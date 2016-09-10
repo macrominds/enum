@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
 - provide meaningful Exception when custom Enum is implemented incorrectly.
+
+### Added
+- fromValue method
 
 ## [0.1.0] – 2016-09-09
 ### Added

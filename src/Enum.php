@@ -93,6 +93,7 @@ abstract class Enum
     /**
     * @param mixed $value
     * @return mixed instance of concrete Enum class.
+    * @throws \Exception if the provided value is not one of the values of the custom Enum class.
     */
     public static function fromValue($value)
     {
