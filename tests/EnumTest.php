@@ -57,6 +57,20 @@ class EnumTest extends \PHPUnit_Framework_TestCase
          $this->assertEquals(2, ''.Salutation::MR());
      }
 
+     /** @test */
+     public function it_should_be_fetchable_by_using_a_value()
+     {
+         $this->assertEquals(Salutation::fromValue(2), Salutation::MR());
+     }
+
+     /** @test */
+     public function it_should_throw_an_exception_when_from_value_is_called_with_a_nonexisting_value()
+     {
+         $this->expectException(\Exception::class);
+        
+         $invalidValue = 56;
+         Salutation::fromValue($invalidValue);
+     }
      // TODO: not working in php5.6
      // see http://php.net/manual/de/language.exceptions.php#Hcom118280
      /** @test */
