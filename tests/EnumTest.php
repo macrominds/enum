@@ -28,6 +28,7 @@ namespace macrominds\tests;
 
 use macrominds\enum\Salutation;
 use macrominds\enum\AnyValueEnum;
+use macrominds\enum\FalsyValues;
 use macrominds\enum\invalid\InvalidInstanceField;
 use macrominds\enum\invalid\InvalidInstanceMethod;
 use macrominds\enum\invalid\InvalidMissingFieldAndMethod;
@@ -41,11 +42,11 @@ class EnumTest extends \PHPUnit_Framework_TestCase
          $this->assertInstanceOf(Salutation::class, Salutation::MR());
 
         // same instance
-        $this->assertEquals(Salutation::MR(), Salutation::MR());
+        $this->assertSame(Salutation::MR(), Salutation::MR());
         // just to be sure:
         $this->assertTrue(Salutation::MR()===Salutation::MR());
         // not same instance
-        $this->assertNotEquals(Salutation::MR(), Salutation::MRS());
+        $this->assertNotSame(Salutation::MR(), Salutation::MRS());
         // just to be sure:
         $this->assertFalse(Salutation::MR()===Salutation::MRS());
      }
@@ -60,7 +61,7 @@ class EnumTest extends \PHPUnit_Framework_TestCase
      /** @test */
      public function it_should_be_fetchable_by_using_a_value()
      {
-         $this->assertEquals(Salutation::fromValue(2), Salutation::MR());
+         $this->assertSame(Salutation::fromValue(2), Salutation::MR());
      }
 
      /** @test */
@@ -70,6 +71,20 @@ class EnumTest extends \PHPUnit_Framework_TestCase
         
          $invalidValue = 56;
          Salutation::fromValue($invalidValue);
+     }
+
+     /** @test */
+     public function it_should_provide_the_correct_enum_instance_in_strict_mode()
+     {
+         $nonStrictZero = FalsyValues::fromValue(0);
+         $nonStrictFalse = FalsyValues::fromValue(false);
+        // Beware non strict mode for values that evaluate to equal.
+        // The following behavior is known, but may not be desired!
+        $this->assertSame($nonStrictZero, $nonStrictFalse);
+
+        // Use strict mode instead
+        $this->assertSame(FalsyValues::Boolean(), FalsyValues::fromValueStrict(false));
+         $this->assertSame(FalsyValues::Integer(), FalsyValues::fromValueStrict(0));
      }
      // TODO: not working in php5.6
      // see http://php.net/manual/de/language.exceptions.php#Hcom118280
@@ -95,13 +110,13 @@ class EnumTest extends \PHPUnit_Framework_TestCase
      /** @test */
      public function it_can_use_any_value_type()
      {
-         $this->assertEquals(AnyValueEnum::String(), AnyValueEnum::String());
-         $this->assertEquals(AnyValueEnum::Integer(), AnyValueEnum::Integer());
-         $this->assertEquals(AnyValueEnum::Object(), AnyValueEnum::Object());
+         $this->assertSame(AnyValueEnum::String(), AnyValueEnum::String());
+         $this->assertSame(AnyValueEnum::Integer(), AnyValueEnum::Integer());
+         $this->assertSame(AnyValueEnum::Object(), AnyValueEnum::Object());
 
-         $this->assertNotEquals(AnyValueEnum::String(), AnyValueEnum::Integer());
-         $this->assertNotEquals(AnyValueEnum::Integer(), AnyValueEnum::Object());
-         $this->assertNotEquals(AnyValueEnum::Object(), AnyValueEnum::String());
+         $this->assertNotSame(AnyValueEnum::String(), AnyValueEnum::Integer());
+         $this->assertNotSame(AnyValueEnum::Integer(), AnyValueEnum::Object());
+         $this->assertNotSame(AnyValueEnum::Object(), AnyValueEnum::String());
      }
 
      /** @test */

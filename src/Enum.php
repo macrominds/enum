@@ -91,15 +91,26 @@ abstract class Enum
         return $this->value;
     }
     /**
+    * Returns the Enum instance for this value. The value is checked strictly. That means, it will not find 0 for a boolean false and it requires you to pass exactly the type and value, you search. This may be NOT the right choice, when dealing with unknown datatypes (e.g. when working with database values).
     * @param mixed $value
     * @return mixed instance of concrete Enum class.
     * @throws \Exception if the provided value is not one of the values of the custom Enum class.
     */
-    public static function fromValue($value)
+    public static function fromValueStrict($value)
+    {
+        return self::fromValue($value, true);
+    }
+    /**
+    * Returns the Enum instance for this value. If $strict==true, then this method behaves exactly like fromValueStrict. Otherwise it returns values that evaluate to equal $value. Using the default mode (not strict) may be the right choice, when dealing with unknown datatypes (e.g. when working with database values). However: Don't use it with Enums whose different values evaluate to equal. You'd get wrong results. Example: Don't use with an Enum that has a value of boolean false and a value of int 0, because these values cannot be distinguished in non-strict mode. In that case, use fromValueStrict and cast the value to the datatype defined in the Enum. ( fromStrictValue((int)0); ).
+    * @param mixed $value
+    * @return mixed instance of concrete Enum class.
+    * @throws \Exception if the provided value is not one of the values of the custom Enum class.
+    */
+    public static function fromValue($value, $strict=false)
     {
         self::initIfNecessary();
         // don't use array_flip here, because the values may be of a type that is not allowed to be a key.
-        $key = array_search($value, self::$original_enums, true);
+        $key = array_search($value, self::$original_enums, $strict);
         if ($key===false) {
             throw new \Exception(sprintf("Value %s doesn't represent any of the values of %s.", $value, static::class));
         }

@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - provide meaningful Exception when custom Enum is implemented incorrectly.
 
 ### Added
-- fromValue method
+- fromValue method with strict mode and non-strict mode
 
 ## [0.1.0] – 2016-09-09
 ### Added
