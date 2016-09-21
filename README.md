@@ -1,5 +1,7 @@
 # A simple enum implementation for php that allows for typehinting.
 
+[![Build Status](https://travis-ci.org/macrominds/enum.svg)](https://travis-ci.org/macrominds/enum)
+
 ## Usage
 
 ### Example
