@@ -8,7 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - provide meaningful Exception when custom Enum is implemented incorrectly.
 
 ### Added
+- static methods all() for all enum instances, values() for all values of this enum, names() for all names of this enum
+- instance method name()
 - fromValue method with strict mode and non-strict mode
+
+### Fixed
+- Typo in README
 
 ## [0.1.0] – 2016-09-09
 ### Added
