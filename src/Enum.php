@@ -30,10 +30,12 @@ namespace macrominds\enum;
 abstract class Enum
 {
     private $value = null;
+    private $name = null;
     private static $original_enums = null;
 
-    protected function __construct($value)
+    protected function __construct($name, $value)
     {
+        $this->name = $name;
         $this->value = $value;
     }
 
@@ -45,7 +47,7 @@ abstract class Enum
         self::$original_enums = isset(static::$enums)?static::$enums:static::enums();
         // TODO implement check for unique names and values
         foreach (self::$original_enums as $name=>$value) {
-            static::$map[''.$name] = new static($value);
+            static::$map[''.$name] = new static($name,$value);
         }
     }
 
@@ -57,27 +59,38 @@ abstract class Enum
         }
         $trace = debug_backtrace();
         trigger_error(
-            sprintf("Undefined %s::%s() in %s line %s.\nKnown options are:\n%s", self::stripNS(static::class), $element, $trace[0]['file'], $trace[0]['line'], self::listNames()),
+            sprintf("Undefined %s::%s() in %s line %s.\nKnown options are:\n%s", self::stripNS(static::class), $element, $trace[0]['file'], $trace[0]['line'], self::listDebugNames()),
             E_USER_NOTICE);
         return null;
     }
 
     private static function initIfNecessary()
     {
-        if (!in_array(Enumerations::class, class_uses(static::class), true)) {
-            throw new \Exception(sprintf("You must add the trait \"macrominds\\enum\\Enumerations\" to your custom Enum.\n".
-                "Example:\n\nclass %s\n{\n\tuse macrominds\\enum\\Enumerations;\n//[...]\n}", self::stripNS(static::class)));
-        }
+        self::verifyCorrectTraitUsage();
         if (static::$map===null) {
             static::init();
         }
     }
+
+    private static function verifyCorrectTraitUsage()
+    {
+        if (!static::usesEnumerationsTrait()) {
+            throw new \Exception(sprintf("You must add the trait \"macrominds\\enum\\Enumerations\" to your custom Enum.\n".
+                "Example:\n\nclass %s\n{\n\tuse macrominds\\enum\\Enumerations;\n//[...]\n}", self::stripNS(static::class)));
+        }
+    }
+
+    private static function usesEnumerationsTrait()
+    {
+        return in_array(Enumerations::class, class_uses(static::class), true);
+    }
+
     private static function stripNS($className)
     {
         return substr($className, strrpos($className, '\\') + 1);
     }
 
-    public static function listNames()
+    private static function listDebugNames()
     {
         $className = self::stripNS(static::class);
 
@@ -89,6 +102,10 @@ abstract class Enum
     public function value()
     {
         return $this->value;
+    }
+    public function name()
+    {
+        return $this->name;
     }
     /**
     * Returns the Enum instance for this value. The value is checked strictly. That means, it will not find 0 for a boolean false and it requires you to pass exactly the type and value, you search. This may be NOT the right choice, when dealing with unknown datatypes (e.g. when working with database values).
@@ -120,5 +137,21 @@ abstract class Enum
     public function __toString()
     {
         return ''.$this->value;
+    }
+
+    public static function all()
+    {
+        return array_values(static::$map);
+    }
+
+    public static function values()
+    {
+        return array_map(function($enumInstance){
+            return $enumInstance->value();
+        },static::all());
+    }
+    public static function names()
+    {
+        return array_keys(static::$map);
     }
 }

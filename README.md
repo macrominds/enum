@@ -24,7 +24,7 @@ class Salutation extends Enum
 }
 ```
 
-If you require complex epressions for your enum values, just take the alternative static method approach and your fine.
+If you require complex epressions for your enum values, just take the alternative static method approach and you're fine.
 
 ```
 //alternative approach

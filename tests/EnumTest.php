@@ -92,7 +92,7 @@ class EnumTest extends \PHPUnit_Framework_TestCase
      public function it_cannot_be_instanciated_directly()
      {
          $this->expectException(\Error::class);
-         new Salutation(4);
+         new Salutation('MRX',4);
      }
 
      /** @test */
@@ -142,6 +142,45 @@ class EnumTest extends \PHPUnit_Framework_TestCase
          } catch (\Exception $e) {
              // success
          }
+     }
+
+     /** @test */
+     public function it_lists_all_available_instances()
+     {
+        $expected = [Salutation::MR(), Salutation::MRS(), Salutation::MS()];
+        $actual = Salutation::all();
+
+        // order shall not matter:
+        sort($expected);
+        sort($actual);
+
+        $this->assertEquals($expected, $actual);
+     }
+
+     /** @test */
+     public function it_lists_all_available_values()
+     {
+        $expected = [Salutation::MR()->value(), Salutation::MRS()->value(), Salutation::MS()->value()];
+        $actual = Salutation::values();
+
+        // order shall not matter:
+        sort($expected);
+        sort($actual);
+
+        $this->assertEquals($expected, $actual);  
+     }
+
+     /** @test */
+     public function it_lists_all_available_names()
+     {
+        $expected = [Salutation::MR()->name(), Salutation::MRS()->name(), Salutation::MS()->name()];
+        $actual = Salutation::names();
+
+        // order shall not matter:
+        sort($expected);
+        sort($actual);
+
+        $this->assertEquals($expected, $actual);  
      }
 
      /** @test */
