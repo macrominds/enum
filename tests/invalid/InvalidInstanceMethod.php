@@ -37,10 +37,10 @@ class InvalidInstanceMethod extends Enum
     * invalid, because this is an instance method. Not a static method.
     */
     /*static*/ protected function enums()
- {
-     return [
+    {
+        return [
             'ONE' => 1,
             'TWO' => 2
         ];
- }
+    }
 }

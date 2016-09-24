@@ -47,7 +47,7 @@ abstract class Enum
         self::$original_enums = isset(static::$enums)?static::$enums:static::enums();
         // TODO implement check for unique names and values
         foreach (self::$original_enums as $name=>$value) {
-            static::$map[''.$name] = new static($name,$value);
+            static::$map[''.$name] = new static($name, $value);
         }
     }
 
@@ -146,9 +146,9 @@ abstract class Enum
 
     public static function values()
     {
-        return array_map(function($enumInstance){
+        return array_map(function ($enumInstance) {
             return $enumInstance->value();
-        },static::all());
+        }, static::all());
     }
     public static function names()
     {
