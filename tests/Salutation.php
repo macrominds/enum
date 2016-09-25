@@ -27,9 +27,9 @@
 namespace macrominds\enum;
 
 /**
- * @method static \App\Enums\Salutation MRS()
- * @method static \App\Enums\Salutation MR()
- * @method static \App\Enums\Salutation MS()
+ * @method static \macrominds\enum\Salutation MRS()
+ * @method static \macrominds\enum\Salutation MR()
+ * @method static \macrominds\enum\Salutation MS()
  */
 class Salutation
 {

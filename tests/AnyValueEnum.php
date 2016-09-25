@@ -27,9 +27,9 @@
 namespace macrominds\enum;
 
 /**
- * @method static \App\Enums\Salutation String()
- * @method static \App\Enums\Salutation Integer()
- * @method static \App\Enums\Salutation Object()
+ * @method static \macrominds\enum\AnyValueEnum String()
+ * @method static \macrominds\enum\AnyValueEnum Integer()
+ * @method static \macrominds\enum\AnyValueEnum Object()
  */
 class AnyValueEnum
 {

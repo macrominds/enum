@@ -27,8 +27,8 @@
 namespace macrominds\enum;
 
 /**
- * @method static \App\Enums\Salutation Boolean()
- * @method static \App\Enums\Salutation Integer()
+ * @method static \macrominds\enum\FalsyValues Boolean()
+ * @method static \macrominds\enum\FalsyValues Integer()
   */
 class FalsyValues
 {
