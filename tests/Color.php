@@ -26,20 +26,15 @@
 
 namespace macrominds\enum;
 /**
- * @method static \App\Enums\Salutation String()
- * @method static \App\Enums\Salutation Integer()
- * @method static \App\Enums\Salutation Object()
- */
-class AnyValueEnum
+ * @method static \App\Enums\Salutation green()
+ * @method static \App\Enums\Salutation red()
+  */
+class Color
 {
     use Enumerations;
 
-    protected static function enums()
-    {
-        return [
-            'String' => 'string',
-            'Integer' => 2,
-            'Object' => Salutation::MR()
+    protected static $enums = [
+            'green' => '#00ff00',
+            'red' => '#ff0000'
         ];
-    }
 }
