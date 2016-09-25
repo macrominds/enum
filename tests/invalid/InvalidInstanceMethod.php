@@ -24,20 +24,22 @@
  * THE SOFTWARE.
  */
 
-namespace macrominds\enum;
+namespace macrominds\enum\invalid;
 
-/**
- * @method static \App\Enums\Salutation MRS()
- * @method static \App\Enums\Salutation MR()
- * @method static \App\Enums\Salutation MS()
- */
-class Salutation
+use macrominds\enum\Enumerations;
+
+class InvalidInstanceMethod
 {
     use Enumerations;
 
-    protected static $enums = [
-            'MRS' => 1,
-            'MR' => 2,
-            'MS' => 3
+    /**
+    * invalid, because this is an instance method. Not a static method.
+    */
+    /*static*/ protected function enums()
+    {
+        return [
+            'ONE' => 1,
+            'TWO' => 2
         ];
+    }
 }

@@ -27,17 +27,18 @@
 namespace macrominds\enum;
 
 /**
- * @method static \App\Enums\Salutation MRS()
- * @method static \App\Enums\Salutation MR()
- * @method static \App\Enums\Salutation MS()
- */
-class Salutation
+ * @method static \App\Enums\Salutation Boolean()
+ * @method static \App\Enums\Salutation Integer()
+  */
+class FalsyValues
 {
     use Enumerations;
 
-    protected static $enums = [
-            'MRS' => 1,
-            'MR' => 2,
-            'MS' => 3
+    protected static function enums()
+    {
+        return [
+            'Boolean' => false,
+            'Integer' => 0
         ];
+    }
 }

@@ -24,20 +24,11 @@
  * THE SOFTWARE.
  */
 
-namespace macrominds\enum;
+namespace macrominds\enum\invalid;
 
-/**
- * @method static \App\Enums\Salutation MRS()
- * @method static \App\Enums\Salutation MR()
- * @method static \App\Enums\Salutation MS()
- */
-class Salutation
+use macrominds\enum\Enumerations;
+
+class InvalidMissingFieldAndMethod
 {
     use Enumerations;
-
-    protected static $enums = [
-            'MRS' => 1,
-            'MR' => 2,
-            'MS' => 3
-        ];
 }

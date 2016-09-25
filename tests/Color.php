@@ -27,17 +27,15 @@
 namespace macrominds\enum;
 
 /**
- * @method static \App\Enums\Salutation MRS()
- * @method static \App\Enums\Salutation MR()
- * @method static \App\Enums\Salutation MS()
- */
-class Salutation
+ * @method static \App\Enums\Salutation green()
+ * @method static \App\Enums\Salutation red()
+  */
+class Color
 {
     use Enumerations;
 
     protected static $enums = [
-            'MRS' => 1,
-            'MR' => 2,
-            'MS' => 3
+            'green' => '#00ff00',
+            'red' => '#ff0000'
         ];
 }
