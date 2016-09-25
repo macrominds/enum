@@ -26,7 +26,9 @@
 
 namespace macrominds\tests;
 
+use macrominds\enum\Delegatee;
 use macrominds\enum\Salutation;
+use macrominds\enum\Color;
 use macrominds\enum\AnyValueEnum;
 use macrominds\enum\FalsyValues;
 use macrominds\enum\invalid\InvalidInstanceField;
@@ -187,5 +189,13 @@ class EnumTest extends \PHPUnit_Framework_TestCase
      public function it_checks_that_the_configured_names_and_values_are_unique()
      {
          $this->markTestSkipped('It currently doesn\'t check for unique names or values. At the moment, this is the responsibility of the developer of the custom enum.');
+     }
+
+     /** @test */
+     public function it_will_initialize_when_calling_all()
+     {
+         $this->assertFalse(Color::isInitialized());
+         $colors = Color::all();
+         $this->assertCount(2, $colors);
      }
 }

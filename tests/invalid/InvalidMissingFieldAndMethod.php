@@ -26,10 +26,9 @@
 
 namespace macrominds\enum\invalid;
 
-use macrominds\enum\Enum;
 use macrominds\enum\Enumerations;
 
-class InvalidMissingFieldAndMethod extends Enum
+class InvalidMissingFieldAndMethod
 {
     use Enumerations;
 }

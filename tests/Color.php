@@ -24,19 +24,18 @@
  * THE SOFTWARE.
  */
 
-namespace macrominds\enum\invalid;
+namespace macrominds\enum;
 
-use macrominds\enum\Enumerations;
-
-class InvalidInstanceField
+/**
+ * @method static \App\Enums\Salutation green()
+ * @method static \App\Enums\Salutation red()
+  */
+class Color
 {
     use Enumerations;
 
-    /**
-    * invalid, because this is an instance field. Not a static property.
-    */
-    /*static*/ protected $enums = [
-        'ONE' => 1,
-        'TWO' => 2
-    ];
+    protected static $enums = [
+            'green' => '#00ff00',
+            'red' => '#ff0000'
+        ];
 }

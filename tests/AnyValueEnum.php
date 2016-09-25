@@ -26,7 +26,12 @@
 
 namespace macrominds\enum;
 
-class AnyValueEnum extends Enum
+/**
+ * @method static \App\Enums\Salutation String()
+ * @method static \App\Enums\Salutation Integer()
+ * @method static \App\Enums\Salutation Object()
+ */
+class AnyValueEnum
 {
     use Enumerations;
 

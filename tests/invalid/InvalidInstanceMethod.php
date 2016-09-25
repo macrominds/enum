@@ -26,10 +26,9 @@
 
 namespace macrominds\enum\invalid;
 
-use macrominds\enum\Enum;
 use macrominds\enum\Enumerations;
 
-class InvalidInstanceMethod extends Enum
+class InvalidInstanceMethod
 {
     use Enumerations;
 

@@ -26,7 +26,12 @@
 
 namespace macrominds\enum;
 
-class Salutation extends Enum
+/**
+ * @method static \App\Enums\Salutation MRS()
+ * @method static \App\Enums\Salutation MR()
+ * @method static \App\Enums\Salutation MS()
+ */
+class Salutation
 {
     use Enumerations;
 

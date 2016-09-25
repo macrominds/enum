@@ -26,7 +26,11 @@
 
 namespace macrominds\enum;
 
-class FalsyValues extends Enum
+/**
+ * @method static \App\Enums\Salutation Boolean()
+ * @method static \App\Enums\Salutation Integer()
+  */
+class FalsyValues
 {
     use Enumerations;
 

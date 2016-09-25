@@ -61,6 +61,30 @@ public function load($value) {
 }
 ```
 
+### IDE Support
+
+In order to support code completion, you may want to give hints about the resulting methods:
+
+```
+use macrominds\enum\Enum;
+use macrominds\enum\Enumerations;
+
+/**
+ * @method static \App\Enums\Salutation MRS()
+ * @method static \App\Enums\Salutation MR()
+ * @method static \App\Enums\Salutation MS()
+ */
+class Salutation extends Enum
+{
+    use Enumerations;
+    protected static $enums = [
+            'MRS' => 1,
+            'MR' => 2,
+            'MS' => 3
+        ];
+}
+```
+
 ## Installation
 
 `composer require macrominds/enum`.
