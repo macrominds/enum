@@ -194,8 +194,8 @@ class EnumTest extends \PHPUnit_Framework_TestCase
      /** @test */
      public function it_will_initialize_when_calling_all()
      {
-        $this->assertFalse(Color::isInitialized());
-        $colors = Color::all();
-        $this->assertCount(2, $colors);
+         $this->assertFalse(Color::isInitialized());
+         $colors = Color::all();
+         $this->assertCount(2, $colors);
      }
 }

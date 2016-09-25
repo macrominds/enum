@@ -29,7 +29,6 @@ namespace macrominds\enum;
 
 class Delegatee
 {
-    
     private $enums = null;
     private $class = null;
     private $instanceMap = null;
@@ -98,5 +97,4 @@ class Delegatee
             $this->instanceMap[''.$name] = new $constructClosure($name, $value);
         }
     }
-    
 }

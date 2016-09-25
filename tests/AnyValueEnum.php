@@ -25,6 +25,7 @@
  */
 
 namespace macrominds\enum;
+
 /**
  * @method static \App\Enums\Salutation String()
  * @method static \App\Enums\Salutation Integer()

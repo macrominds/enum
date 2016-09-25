@@ -25,6 +25,7 @@
  */
 
 namespace macrominds\enum;
+
 /**
  * @method static \App\Enums\Salutation green()
  * @method static \App\Enums\Salutation red()

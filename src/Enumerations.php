@@ -28,12 +28,12 @@ namespace macrominds\enum;
 
 trait Enumerations
 {
-	private $value = null;
+    private $value = null;
     private $name = null;
 
     private static $delegatee = null;
 
-	private function __construct($name, $value)
+    private function __construct($name, $value)
     {
         $this->name = $name;
         $this->value = $value;
@@ -54,32 +54,32 @@ trait Enumerations
     }
 
     private static function getDelegatee()
-	{
-		return self::$delegatee?:self::initDelegatee();
-	}
+    {
+        return self::$delegatee?:self::initDelegatee();
+    }
 
-	private static function initDelegatee()
-	{
-		static::validateCorrectImplementation();
-		self::$delegatee = new Delegatee(static::class, self::getSpecifiedEnums(), function($name,$value){
-			return new static($name,$value);
-		});
-		return self::$delegatee;
-	}
+    private static function initDelegatee()
+    {
+        static::validateCorrectImplementation();
+        self::$delegatee = new Delegatee(static::class, self::getSpecifiedEnums(), function ($name, $value) {
+            return new static($name, $value);
+        });
+        return self::$delegatee;
+    }
 
-	private static function validateCorrectImplementation()
+    private static function validateCorrectImplementation()
     {
         if (!isset(static::$enums)&&!method_exists(static::class, 'enums')) {
-            throw new \Exception(sprintf('You must either implement static field or static method "enums" in %s.',static::class));
+            throw new \Exception(sprintf('You must either implement static field or static method "enums" in %s.', static::class));
         }
     }
     private static function getSpecifiedEnums()
     {
-         return isset(static::$enums)?static::$enums:static::enums();
+        return isset(static::$enums)?static::$enums:static::enums();
     }
 
     
-	
+    
     /**
     * Returns the Enum instance for this value. The value is checked strictly. That means, it will not find 0 for a boolean false and it requires you to pass exactly the type and value, you search. This may be NOT the right choice, when dealing with unknown datatypes (e.g. when working with database values).
     * @param mixed $value
@@ -88,7 +88,7 @@ trait Enumerations
     */
     public static function fromValueStrict($value)
     {
-       	return self::fromValue($value, true);
+        return self::fromValue($value, true);
     }
     /**
     * Returns the Enum instance for this value. If $strict==true, then this method behaves exactly like fromValueStrict. Otherwise it returns values that evaluate to equal $value. Using the default mode (not strict) may be the right choice, when dealing with unknown datatypes (e.g. when working with database values). However: Don't use it with Enums whose different values evaluate to equal. You'd get wrong results. Example: Don't use with an Enum that has a value of boolean false and a value of int 0, because these values cannot be distinguished in non-strict mode. In that case, use fromValueStrict and cast the value to the datatype defined in the Enum. ( fromStrictValue((int)0); ).
@@ -98,7 +98,7 @@ trait Enumerations
     */
     public static function fromValue($value, $strict=false)
     {
-		return self::getDelegatee()->fromValue($value, $strict);
+        return self::getDelegatee()->fromValue($value, $strict);
     }
 
     public static function all()
@@ -117,19 +117,19 @@ trait Enumerations
 
     public static function __callStatic($element, $arguments)
     {
-    	if($element==='enums'){
-    		return null;
-    	}
-		try{
-			$delegatee = self::getDelegatee(); 
-    		return $delegatee->get($element);
-    	}catch(\Exception $e){
-    		$trace = debug_backtrace();
-	        trigger_error(
-	            sprintf("Undefined %s::%s() in %s line %s.\nKnown options are:\n%s", self::stripNS(static::class), $element, $trace[0]['file'], $trace[0]['line'], self::listDebugNames()),
-	            E_USER_NOTICE);
-	        return null;
-    	}
+        if ($element==='enums') {
+            return null;
+        }
+        try {
+            $delegatee = self::getDelegatee();
+            return $delegatee->get($element);
+        } catch (\Exception $e) {
+            $trace = debug_backtrace();
+            trigger_error(
+                sprintf("Undefined %s::%s() in %s line %s.\nKnown options are:\n%s", self::stripNS(static::class), $element, $trace[0]['file'], $trace[0]['line'], self::listDebugNames()),
+                E_USER_NOTICE);
+            return null;
+        }
     }
     private static function listDebugNames()
     {
@@ -146,6 +146,6 @@ trait Enumerations
     }
     public static function isInitialized()
     {
-    	return self::$delegatee!==null;
+        return self::$delegatee!==null;
     }
 }
