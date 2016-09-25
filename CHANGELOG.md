@@ -5,6 +5,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Changed
+-
+
+### Added 
+-
+
+### Fixed
+- 
+
+## [1.0.0] – 2016-09-25
+### Changed
 - Simplified by adding a Delegatee that handles most of the complicated stuff
 - Enums no longer need to extend macrominds\enum\Enum (this is not even supported anymore)
 - provide meaningful Exception when custom Enum is implemented incorrectly.
