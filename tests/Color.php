@@ -27,8 +27,8 @@
 namespace macrominds\enum;
 
 /**
- * @method static \App\Enums\Salutation green()
- * @method static \App\Enums\Salutation red()
+ * @method static \macrominds\enum\Color green()
+ * @method static \macrominds\enum\Color red()
   */
 class Color
 {

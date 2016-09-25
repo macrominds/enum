@@ -12,6 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - 
+## [1.0.1] – 2016-09-26
+### Fixed
+- Outdated README and code completion hints in example Enums
 
 ## [1.0.0] – 2016-09-25
 ### Changed

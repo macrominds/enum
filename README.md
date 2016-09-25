@@ -9,11 +9,10 @@
 In order to create a blazingly simple Salutation enum, just create it as follows:
 
 ```
-use macrominds\enum\Enum;
 use macrominds\enum\Enumerations;
 
 
-class Salutation extends Enum
+class Salutation
 {
 	use Enumerations;
     protected static $enums = [
@@ -29,10 +28,9 @@ If you require complex epressions for your enum values, just take the alternativ
 ```
 //alternative approach
 
-use macrominds\enum\Enum;
 use macrominds\enum\Enumerations;
 
-class AnyValueEnum extends Enum
+class AnyValueEnum
 {
 	use Enumerations;
 
@@ -66,15 +64,14 @@ public function load($value) {
 In order to support code completion, you may want to give hints about the resulting methods:
 
 ```
-use macrominds\enum\Enum;
 use macrominds\enum\Enumerations;
 
 /**
- * @method static \App\Enums\Salutation MRS()
- * @method static \App\Enums\Salutation MR()
- * @method static \App\Enums\Salutation MS()
+ * @method static \macrominds\enum\Salutation MRS()
+ * @method static \macrominds\enum\Salutation MR()
+ * @method static \macrominds\enum\Salutation MS()
  */
-class Salutation extends Enum
+class Salutation
 {
     use Enumerations;
     protected static $enums = [
