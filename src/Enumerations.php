@@ -120,13 +120,24 @@ trait Enumerations
         if ($element==='enums') {
             return null;
         }
+        return self::fromKey($element);
+    }
+
+    /**
+     * Returns the Enum instance for this key. So, if your enum Salutation defines 'MR' => 2 and you call Salutation::fromKey('MR'), you will receive an instance equal to Salutation::MR().
+     * Use this when you're dealing with variables that represent your keys. If the key doesn't match the Enum (e.g. Salutation::fromKey('non-existing')), then null will be returned.
+     * @param string $key the key. Example: if your enum Color defines 'green' => '#00ff00', then Color::fromKey('green')->value() will be '#00ff00'
+     * @return null|mixed instance of concrete Enum class or null if the key doesn't match your constraints
+     */
+    public static function fromKey($key)
+    {
         try {
             $delegatee = self::getDelegatee();
-            return $delegatee->get($element);
+            return $delegatee->get($key);
         } catch (\Exception $e) {
             $trace = debug_backtrace();
             trigger_error(
-                sprintf("Undefined %s::%s() in %s line %s.\nKnown options are:\n%s", self::stripNS(static::class), $element, $trace[0]['file'], $trace[0]['line'], self::listDebugNames()),
+                sprintf("Undefined %s::%s() in %s line %s.\nKnown options are:\n%s", self::stripNS(static::class), $key, $trace[0]['file'], $trace[0]['line'], self::listDebugNames()),
                 E_USER_NOTICE);
             return null;
         }
