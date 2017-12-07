@@ -206,8 +206,9 @@ class EnumTest extends \PHPUnit_Framework_TestCase
      }
 
     /** @test */
-    public function it_returns_null_when_the_requested_key_doesnt_match_the_constraints()
+    public function it_throws_an_exception_when_the_requested_key_doesnt_match_the_constraints()
     {
-        $this->assertNull(Salutation::fromKey('NONEXISTING'));
+        $this->expectException(\Exception::class);
+        Salutation::fromKey('NONEXISTING');
     }
 }
