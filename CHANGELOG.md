@@ -8,10 +8,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 -
 
 ### Added 
-- Ability to instantiate an Enum with a variable key. Example: Salutation::fromKey('MR')
+- 
 
 ### Fixed
 - 
+
+## [1.1.0] – 2017-12-07
+### Added 
+- Ability to instantiate an Enum with a variable key. Example: Salutation::fromKey('MR')
+
 ## [1.0.1] – 2016-09-26
 ### Fixed
 - Outdated README and code completion hints in example Enums
