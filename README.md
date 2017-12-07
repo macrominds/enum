@@ -57,6 +57,12 @@ public function load($value) {
     // throws \Exception if $value is invalid
     return Salutation::fromValue($value);
 }
+
+// example for fetching the enum from key
+public function loadKey($key) {
+    // throws \Exception if $key is invalid
+    return Salutation::fromKey($key);
+}
 ```
 
 ### IDE Support

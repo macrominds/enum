@@ -198,4 +198,17 @@ class EnumTest extends \PHPUnit_Framework_TestCase
          $colors = Color::all();
          $this->assertCount(2, $colors);
      }
+
+     /** @test */
+     public function it_can_be_dynamically_initialized_using_the_key_as_a_string()
+     {
+         $this->assertEquals(Salutation::MR(), Salutation::fromKey('MR'));
+     }
+
+    /** @test */
+    public function it_throws_an_exception_when_the_requested_key_doesnt_match_the_constraints()
+    {
+        $this->expectException(\Exception::class);
+        Salutation::fromKey('NONEXISTING');
+    }
 }
